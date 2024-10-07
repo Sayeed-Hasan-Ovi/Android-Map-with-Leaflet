@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<!--<script>
+    // Initialize the map and set its view to a specific location and zoom level
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // Add a tile layer to the map (this is the map background)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add a marker to the map at the specified location
+    var marker = L.marker([51.505, -0.09]).addTo(map)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
+
+    // Function to update the map view based on passed variables
+    function updateMap(lat, lon) {
+        map.setView([lat, lon], 13);
+        marker.setLatLng([lat, lon])
+            .bindPopup('Updated location: ' + lat + ', ' + lon)
+            .openPopup();
+    }
+
+    // Add click event listener to the map
+    map.on('click', function(e) {
+        var lat = e.latlng.lat;
+        var lon = e.latlng.lng;
+        updateMap(lat, lon);
+    });
+</script>-->
+
+<!--<script>
+    // Initialize the map and set its view to a specific location and zoom level
+    var map = L.map('map').setView([23.6850, 90.3563], 7); // Centered on Bangladesh
+
+    // Define the geographical bounds for Bangladesh
+    var bounds = [
+        [20.55, 88.03], // Southwest corner
+        [26.63, 92.68]  // Northeast corner
+    ];
+
+    // Set the maximum bounds for the map
+    map.setMaxBounds(bounds);
+    map.on('drag', function() {
+        map.panInsideBounds(bounds, { animate: false });
+    });
+
+    // Add a tile layer to the map (this is the map background)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add a marker to the map at the specified location
+    var marker = L.marker([23.6850, 90.3563]).addTo(map)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
+
+    // Function to update the map view based on passed variables
+    function updateMap(lat, lon) {
+        if (lat >= 20.55 && lat <= 26.63 && lon >= 88.03 && lon <= 92.68) {
+            map.setView([lat, lon], 13);
+            marker.setLatLng([lat, lon])
+                .bindPopup('Updated location: ' + lat + ', ' + lon)
+                .openPopup();
+        } else {
+            alert("Location is outside the allowed boundary.");
+        }
+    }
+
+    // Add click event listener to the map
+    map.on('click', function(e) {
+        var lat = e.latlng.lat;
+        var lon = e.latlng.lng;
+        updateMap(lat, lon);
+    });
+</script>-->
+
+<script>
+    // Initialize the map and set its view to a specific location and zoom level
+    var map = L.map('map', {
+        center: [23.6850, 90.3563], // Centered on Bangladesh
+        zoom: 7,
+        maxBounds: [[20.55, 88.03], [26.63, 92.68]], // Set the geographical bounds for Bangladesh
+        maxBoundsViscosity: 1.0, // Prevents the user from dragging the map out of bounds
+        minZoom: 7 // Minimum zoom level
+    });
+
+    // Add a tile layer to the map (this is the map background)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add a marker to the map at the specified location
+    var marker = L.marker([23.6850, 90.3563]).addTo(map)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
+
+    // Function to update the map view based on passed variables
+    function updateMap(lat, lon) {
+        if (lat >= 20.55 && lat <= 26.63 && lon >= 88.03 && lon <= 92.68) {
+            var currentZoom = map.getZoom();
+            map.setView([lat, lon], currentZoom);
+            marker.setLatLng([lat, lon])
+                .bindPopup('Updated location: ' + lat + ', ' + lon)
+                .openPopup();
+        } else {
+            alert("Location is outside the allowed boundary.");
+        }
+    }
+
+    // Add click event listener to the map
+    map.on('click', function(e) {
+        var lat = e.latlng.lat;
+        var lon = e.latlng.lng;
+        updateMap(lat, lon);
+    });
+</script>
+</body>
+</html>
